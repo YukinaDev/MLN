@@ -129,7 +129,7 @@ export default function Quiz() {
           time: formatTime(),
         });
 
-        // Submit score to API
+        // Submit score to API; send total for accurate percentage on server if used later
         await handleSubmitScore(info.name, finalScore, finalScore);
       }
     }, 1000);

@@ -60,19 +60,24 @@ export const getScoreboard = async () => {
 
     // Transform the API response to match component expectations
     if (response.success && response.data) {
-        const transformedData = response.data.map(item => ({
-            id: item.id,
-            name: item.user_name,
-            score: item.correct, // Use 'correct' as the score
-            total: 15, // Assuming 15 questions total
-            time: new Date(item.created_at).toLocaleTimeString('vi-VN', {
-                hour: '2-digit',
-                minute: '2-digit',
-                second: '2-digit'
-            }),
-            rank: item.rank,
-            percentage: item.percentage
-        }));
+        const transformedData = response.data.map(item => {
+            const totalQuestions = Number(item.total) || 15;
+            const correctAnswers = Number(item.correct) || 0;
+            const computedPercentage = Math.round((correctAnswers / totalQuestions) * 100);
+            return ({
+                id: item.id,
+                name: item.user_name,
+                score: correctAnswers,
+                total: totalQuestions,
+                time: new Date(item.created_at).toLocaleTimeString('vi-VN', {
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    second: '2-digit'
+                }),
+                rank: item.rank,
+                percentage: computedPercentage
+            });
+        });
 
         console.log('Transformed scoreboard data:', transformedData);
         return transformedData;
