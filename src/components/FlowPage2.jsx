@@ -16,11 +16,11 @@ const listVariants = {
 };
 const stepVariants = (prefersReduced) => ({
   hidden: { opacity: 0, y: prefersReduced ? 0 : -18 },
-  show:   { opacity: 1, y: 0, transition: { duration: 0.5 } },
+  show: { opacity: 1, y: 0, transition: { duration: 0.5 } },
 });
 const imageVariants = (prefersReduced) => ({
   hidden: { opacity: 0, y: prefersReduced ? 0 : 24, rotate: prefersReduced ? 0 : -2 },
-  show:   { opacity: 1, y: 0, rotate: 0, transition: { duration: 0.55 } },
+  show: { opacity: 1, y: 0, rotate: 0, transition: { duration: 0.55 } },
 });
 
 export default function StaircaseBullets({ topImg = topImg1, bottomImg = bottomImg1 }) {
@@ -36,8 +36,8 @@ export default function StaircaseBullets({ topImg = topImg1, bottomImg = bottomI
   const bullets = unionSub.bullets || [];
 
   return (
-    <div className="relative min-h-[80vh] w-full overflow-hidden bg-white">
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-[#F5F5F5] via-white to-[#E0E0E0]/40" />
+    <div className="relative min-h-[80vh] w-full overflow-hidden" style={{ background: "transparent" }}>
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-[var(--page-bg)] via-[var(--page-bg)] to-[#DCCDB8]/40" />
 
       <section className="relative mx-auto max-w-7xl px-6 pt-10 pb-16">
         {/* Subtitle */}
@@ -55,50 +55,50 @@ export default function StaircaseBullets({ topImg = topImg1, bottomImg = bottomI
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
           {/* LEFT: 2 ảnh – chỉ animate khi vào viewport */}
           <div className="relative h-[460px] md:h-[520px]">
-  {/* Ảnh trên (lệch phải) */}
-  <motion.div
-    variants={imageVariants(prefersReduced)}
-    initial="hidden"
-    whileInView="show"
-    viewport={{ once: true, amount: 0.35 }}
-    className="absolute right-8 top-0 h-56 w-56 md:h-72 md:w-72
+            {/* Ảnh trên (lệch phải) */}
+            <motion.div
+              variants={imageVariants(prefersReduced)}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true, amount: 0.35 }}
+              className="absolute right-8 top-0 h-56 w-56 md:h-72 md:w-72
                rounded-3xl bg-[#1C1C1C] p-2 shadow-2xl"
-  >
-    <div className="h-full w-full overflow-hidden rounded-2xl">
-      <img
-        src={
-          topImg ||
-          "https://images.unsplash.com/photo-1536337005238-94b997371b40?q=80&w=1200&auto=format&fit=crop"
-        }
-        alt=""
-        className="h-full w-full object-cover grayscale"
-      />
-    </div>
-    <div className="absolute -top-2 -left-2 h-5 w-5 rounded-full border-2 border-[#FFD700]" />
-  </motion.div>
+            >
+              <div className="h-full w-full overflow-hidden rounded-2xl">
+                <img
+                  src={
+                    topImg ||
+                    "https://images.unsplash.com/photo-1536337005238-94b997371b40?q=80&w=1200&auto=format&fit=crop"
+                  }
+                  alt=""
+                  className="h-full w-full object-cover grayscale"
+                />
+              </div>
+              <div className="absolute -top-2 -left-2 h-5 w-5 rounded-full border-2 border-[#FFD700]" />
+            </motion.div>
 
-  {/* Ảnh dưới (lệch trái, hạ xuống chút) */}
-  <motion.div
-    variants={imageVariants(prefersReduced)}
-    initial="hidden"
-    whileInView="show"
-    viewport={{ once: true, amount: 0.35 }}
-    className="absolute left-8 top-32 h-56 w-56 md:h-72 md:w-72
+            {/* Ảnh dưới (lệch trái, hạ xuống chút) */}
+            <motion.div
+              variants={imageVariants(prefersReduced)}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true, amount: 0.35 }}
+              className="absolute left-8 top-32 h-56 w-56 md:h-72 md:w-72
                rounded-3xl bg-[#1C1C1C] p-2 shadow-2xl"
-  >
-    <div className="h-full w-full overflow-hidden rounded-2xl">
-      <img
-        src={
-          bottomImg ||
-          "https://images.unsplash.com/photo-1558980394-0c0c5d0d0b9b?q=80&w=1200&auto=format&fit=crop"
-        }
-        alt=""
-        className="h-full w-full object-cover grayscale"
-      />
-    </div>
-    <div className="absolute -bottom-2 -right-2 h-5 w-5 rounded-full border-2 border-[#8B0000]" />
-  </motion.div>
-</div>
+            >
+              <div className="h-full w-full overflow-hidden rounded-2xl">
+                <img
+                  src={
+                    bottomImg ||
+                    "https://images.unsplash.com/photo-1558980394-0c0c5d0d0b9b?q=80&w=1200&auto=format&fit=crop"
+                  }
+                  alt=""
+                  className="h-full w-full object-cover grayscale"
+                />
+              </div>
+              <div className="absolute -bottom-2 -right-2 h-5 w-5 rounded-full border-2 border-[#8B0000]" />
+            </motion.div>
+          </div>
 
 
           {/* RIGHT: bậc thang – load dần khi scroll tới */}
@@ -110,7 +110,7 @@ export default function StaircaseBullets({ topImg = topImg1, bottomImg = bottomI
               initial="hidden"
               whileInView="show"
               viewport={{ once: true, amount: 0.3 }} // kích hoạt khi ~30% vùng này vào khung nhìn
-              className="flex flex-col gap-4"
+              className="flex flex-col gap-5"
             >
               {bullets.slice(0, 5).map((text, i) => (
                 <motion.li
@@ -118,17 +118,19 @@ export default function StaircaseBullets({ topImg = topImg1, bottomImg = bottomI
                   variants={stepVariants(prefersReduced)}
                   className={`ml-auto ${widths[i] || "w-full"}`}
                 >
-                  <div className="rounded-xl border border-[#E0E0E0] bg-white/95 px-5 py-4 shadow-md hover:shadow-lg transition-shadow">
-                    <div className="flex items-start gap-3">
+                  <div className="group relative overflow-hidden rounded-2xl bg-white/95 ring-1 ring-[#E0E0E0] px-6 py-5 shadow-sm transition-all duration-300 hover:shadow-xl hover:-translate-y-0.5">
+                    <span className="absolute left-0 top-0 h-full w-1 bg-gradient-to-b from-[#8B0000] to-[#B22222]" />
+                    <span className="pointer-events-none absolute -top-10 -right-10 h-24 w-24 rounded-full bg-[#FFD700]/10 blur-2xl" />
+                    <div className="relative flex items-start gap-3">
                       <span className="mt-2 inline-block h-2 w-2 rounded-full bg-[#8B0000]" />
                       <p
-                        className="text-sm md:text-base leading-relaxed text-[#1C1C1C]"
+                        className="text-[15px] md:text-base leading-relaxed text-[#1C1C1C]"
                         style={{ fontFamily: "'Roboto','Open Sans','Inter',sans-serif" }}
                       >
                         {text}
                       </p>
                     </div>
-                    <div className="mt-3 h-[3px] w-20 rounded-full bg-[#FFD700]" />
+                    <div className="mt-3 h-[3px] w-20 rounded-full bg-[#FFD700] transition-all duration-300 group-hover:w-28" />
                   </div>
                 </motion.li>
               ))}

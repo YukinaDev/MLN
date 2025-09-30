@@ -1,5 +1,7 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+import { useEffect, useRef } from "react";
+import anime from "animejs";
 
 const Scoreboard = ({
     scoreboard,
@@ -8,6 +10,24 @@ const Scoreboard = ({
     submitError,
     onRetry
 }) => {
+    const listRef = useRef(null);
+
+    useEffect(() => {
+        if (!listRef.current) return;
+        const numbers = listRef.current.querySelectorAll('[data-count]');
+        numbers.forEach((el) => {
+            const end = parseInt(el.getAttribute('data-count') || '0', 10);
+            anime({
+                targets: { val: 0 },
+                val: end,
+                easing: 'easeOutQuad',
+                duration: 800,
+                round: 1,
+                update: (a) => (el.textContent = a.animations[0].currentValue),
+            });
+        });
+    }, [scoreboard]);
+
     return (
         <motion.div
             initial={{ scale: 0.9, opacity: 0 }}
@@ -42,7 +62,7 @@ const Scoreboard = ({
 
             {/* Show scoreboard */}
             {!isSubmitting && scoreboard.length > 0 && (
-                <div className="space-y-2">
+                <div ref={listRef} className="space-y-2">
                     {scoreboard.map((player, idx) => (
                         <div
                             key={player.id}
@@ -60,12 +80,8 @@ const Scoreboard = ({
                                 </span>
                             </div>
                             <div className="flex items-center space-x-4">
-                                <span className="text-sm">
-                                    {player.score}/{player.total || 15}
-                                </span>
-                                <span className="text-sm font-medium">
-                                    {player.percentage}%
-                                </span>
+                                <span className="text-sm"><span data-count={player.score}></span>/{player.total || 15}</span>
+                                <span className="text-sm font-medium"><span data-count={player.percentage}></span>%</span>
                                 <span className="text-sm text-gray-600">
                                     {player.time}
                                 </span>

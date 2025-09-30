@@ -20,9 +20,9 @@ export default function BadInfluenceSection() {
   const bullets = badSub.bullets || [];
 
   return (
-    <div className="relative min-h-[80vh] w-full overflow-hidden bg-white">
+    <div className="relative min-h-[80vh] w-full overflow-hidden" style={{ background: "transparent" }}>
       <section className="relative mx-auto max-w-7xl px-6 py-16 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-        
+
         {/* RIGHT (cũ) -> giờ sang LEFT */}
         <div>
           <h2
@@ -32,7 +32,7 @@ export default function BadInfluenceSection() {
             {subtitle}
           </h2>
 
-          <ul className="flex flex-col gap-4">
+          <ul className="flex flex-col gap-5">
             {bullets.map((text, i) => (
               <motion.li
                 key={i}
@@ -40,12 +40,14 @@ export default function BadInfluenceSection() {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true, amount: 0.4 }}
                 transition={{ duration: 0.45, delay: i * 0.07 }}
-                className="rounded-xl border border-[#E0E0E0] bg-white/95 p-4 shadow-md hover:shadow-lg transition"
+                className="group relative overflow-hidden rounded-2xl bg-white/95 ring-1 ring-[#E0E0E0] px-6 py-5 shadow-sm transition-all duration-300 hover:shadow-xl hover:-translate-y-0.5"
               >
-                <div className="flex items-start gap-3">
+                <span className="absolute left-0 top-0 h-full w-1 bg-gradient-to-b from-[#8B0000] to-[#B22222]" />
+                <span className="pointer-events-none absolute -top-10 -right-10 h-24 w-24 rounded-full bg-[#FFD700]/10 blur-2xl" />
+                <div className="relative flex items-start gap-3">
                   <span className="mt-2 inline-block h-2 w-2 rounded-full bg-[#8B0000]" />
                   <p
-                    className="text-sm md:text-base leading-relaxed text-[#1C1C1C]"
+                    className="text-[15px] md:text-base leading-relaxed text-[#1C1C1C]"
                     style={{
                       fontFamily: "'Roboto','Open Sans','Inter',sans-serif",
                     }}
@@ -53,7 +55,7 @@ export default function BadInfluenceSection() {
                     {text}
                   </p>
                 </div>
-                <div className="mt-3 h-[3px] w-16 rounded-full bg-[#FFD700]" />
+                <div className="mt-3 h-[3px] w-20 rounded-full bg-[#FFD700] transition-all duration-300 group-hover:w-28" />
               </motion.li>
             ))}
           </ul>
@@ -68,7 +70,7 @@ export default function BadInfluenceSection() {
             transition={{ duration: 0.5 }}
             className="h-56 md:h-72 w-full rounded-3xl overflow-hidden shadow-2xl bg-[#1C1C1C]"
           >
-            <img src= {topImg}
+            <img src={topImg}
               alt="https://images.unsplash.com/photo-1581093588401-22d9f8d3c1d7?q=80&w=1200&auto=format&fit=crop"
               className="h-full w-full object-cover grayscale"
             />

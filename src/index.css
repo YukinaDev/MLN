@@ -1,2 +1,16 @@
 @import "tailwindcss";
 
+:root {
+    --page-bg: #FAF3E7;
+    /* Warm parchment tone matching red/gold theme */
+}
+
+html,
+body,
+#root {
+    height: 100%;
+}
+
+body {
+    background: var(--page-bg);
+}
